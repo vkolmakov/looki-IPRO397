@@ -1,21 +1,5 @@
 <template>
-  <div id="app">
-    <h1>{{ msg }}</h1>
+  <div id="id">
+    <router-view></router-view>
   </div>
 </template>
-
-<script>
-export default {
-  data () {
-    return {
-      msg: 'It worked!!'
-    }
-  }
-}
-</script>
-
-<style>
-body {
-  font-family: Helvetica, sans-serif;
-}
-</style>
