@@ -32,12 +32,5 @@
     "vue-loader": "^9.4.2",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.12.2"
-  },
-  "babel": {
-    "presets": [
-      "node5",
-      "stage-0",
-      "es2015"
-    ]
   }
 }
