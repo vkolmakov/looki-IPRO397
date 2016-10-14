@@ -3,13 +3,17 @@
   "main": "bin/www",
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon -w ./ -x npm run start"
+    "dev": "NODE_ENV=nodemon nodemon -w ./ -x npm run start",
+    "lint": "eslint ."
   },
   "dependencies": {
     "babel-preset-node5": "^11.1.0",
     "babel-register": "^6.14.0",
+    "body-parser": "^1.15.2",
     "compression": "^1.6.2",
     "express": "^4.14.0",
+    "pg": "^6.1.0",
+    "sequelize": "^3.24.3",
     "vue": "^2.0.0-rc.5",
     "vue-router": "^2.0.0-rc.5",
     "webpack": "^2.1.0-beta.22"
