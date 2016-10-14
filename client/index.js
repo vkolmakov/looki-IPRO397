@@ -15,6 +15,7 @@ const router = new VueRouter({
   routes,
 })
 
+// eslint-disable-next-line
 new Vue({
   router,
   el: '#app',
