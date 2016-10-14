@@ -9,6 +9,9 @@ const sequelize = new Sequelize(config.DB_NAME, config.DB_USERNAME, config.DB_PA
   host: config.DB_HOST,
   port: config.DB_PORT,
   dialect: config.DB_DIALECT,
+  logging: process.env.NODE_ENV !== 'production'
+           ? msg => console.log(msg) // eslint-disable-line
+           : false,
 })
 
 const User = user(sequelize, Sequelize)
@@ -17,7 +20,10 @@ const Course = course(sequelize, Sequelize)
 
 export const db = {
   connect() {
-    return sequelize.sync()
+    return sequelize.sync().then(
+      // eslint-disable-next-line
+      console.log(`Connected to the database: ${config.DB_USERNAME}@${config.DB_HOST}`)
+    )
   },
 
   User,

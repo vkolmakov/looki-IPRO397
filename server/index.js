@@ -3,17 +3,18 @@ import path from 'path'
 import bodyParser from 'body-parser'
 
 import { setupWebpackMiddleware, serveStaticFiles } from '../build/utils'
+import config from './config'
 import setupRouter from './router'
 
 import { db } from './services/db'
 
 (async () => {
   const app = express()
-  const port = process.env.PORT || 3000
+  const port = process.env.PORT || config.PORT
 
   await db.connect()
 
-  const isDevClient = process.env.NODE_ENV !== 'production' || process.env.NODE_ENV !== 'nodemon'
+  const isDevClient = !['nodemon', 'production'].find(env => env === process.env.NODE_ENV)
 
   app.use(bodyParser.json())
   setupRouter(app)
