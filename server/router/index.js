@@ -6,4 +6,4 @@ const routes = [
   courseRoutes,
 ]
 
-export default app => routes.forEach(route => app.use('/api', route(db)))
+export default (app) => routes.forEach(route => app.use('/api', route(db)))

@@ -1,11 +1,7 @@
 import { notFound, actionFailed } from '../services/errors'
 
-import { extractItem } from '../services/db'
+import { extractCourse } from '../services/db'
 import crudHandlers from '../services/crudHandlers'
-
-const ALLOWED_TO_WRITE = ['name']
-const ALLOWED_TO_READ = ['name', 'id']
-const extractCourse = extractItem(ALLOWED_TO_READ)
 
 const getCourses = (db) => () => new Promise(async (resolve, reject) => {
   try {
@@ -22,13 +18,13 @@ const getCourse = (db) => (id) => new Promise(async (resolve, reject) => {
   if (result) {
     resolve(extractCourse(result))
   } else {
-    reject(notFound())
+    reject(notFound('course'))
   }
 })
 
 const createCourse = (db) => (course) => new Promise(async (resolve, reject) => {
   const createdCourse = await db.Course.build(course, {
-    fields: ALLOWED_TO_WRITE,
+    fields: db.Course.ALLOWED_TO_WRITE,
   })
 
   try {
@@ -52,7 +48,7 @@ const removeCourse = (db) => (id) => new Promise(async (resolve, reject) => {
 const updateCourse = (db) => (id, course) => new Promise(async (resolve, reject) => {
   try {
     const updatedCourse = await db.Course.update(course, {
-      fields: ALLOWED_TO_WRITE,
+      fields: db.Course.ALLOWED_TO_WRITE,
     })
     resolve(extractCourse(updatedCourse))
   } catch (err) {
@@ -60,7 +56,7 @@ const updateCourse = (db) => (id, course) => new Promise(async (resolve, reject)
   }
 })
 
-export default db => crudHandlers(db)({
+export default (db) => crudHandlers(db)({
   onGet: getCourses,
   onGetId: getCourse,
   onPost: createCourse,
